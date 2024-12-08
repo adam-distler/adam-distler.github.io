@@ -1,4 +1,2 @@
-# adam-distler.github.io
-remote_theme: pages-themes/architect@v0.2.0
-plugins:
-- jekyll-remote-theme # add this line to the plugins list if you already have one
+# Adam Distler's Website
+## Still a work-in-progress, but I should try to get this done soon.
