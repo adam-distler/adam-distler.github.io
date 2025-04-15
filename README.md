@@ -1,2 +1,4 @@
-# Adam Distler's Website
-## Still a work-in-progress, but I should try to get this done soon.
+# Hi, I'm Adam Distler!
+## About Me
+##
+### I'm currently a post-baccalaureate researcher at the University of Wisconsin-Madison.
