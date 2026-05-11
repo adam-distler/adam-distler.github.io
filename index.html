@@ -21,11 +21,13 @@ h1, h2, h3, h4, h5, h6 {
   font-size: 22px; 
 }
 
-/* Cute interactive research panel */
+/* Main research playground */
+
 .research-playground {
+  width: 100%;
   margin: 16px auto 48px auto;
-  padding: 28px;
-  border-radius: 28px;
+  padding: 30px;
+  border-radius: 30px;
   background: linear-gradient(135deg, #f8fbff, #fff7fb);
   box-shadow: 0 12px 35px rgba(0,0,0,0.08);
 }
@@ -46,24 +48,32 @@ h1, h2, h3, h4, h5, h6 {
 .research-toy-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 22px;
+  gap: 24px;
 }
 
 .research-toy {
   position: relative;
-  min-height: 300px;
-  border-radius: 24px;
+  min-height: 330px;
+  border-radius: 26px;
   background: white;
   box-shadow: 0 8px 24px rgba(0,0,0,0.08);
   overflow: hidden;
-  padding: 16px;
+  padding: 18px;
   cursor: pointer;
+  border: none;
+  width: 100%;
+  font-family: inherit;
   transition: transform 0.25s ease, box-shadow 0.25s ease;
 }
 
 .research-toy:hover {
   transform: translateY(-6px);
   box-shadow: 0 14px 35px rgba(0,0,0,0.13);
+}
+
+.research-toy:focus {
+  outline: 3px solid rgba(90, 140, 230, 0.35);
+  outline-offset: 4px;
 }
 
 .research-toy h3 {
@@ -82,7 +92,7 @@ h1, h2, h3, h4, h5, h6 {
 
 .toy-stage {
   position: relative;
-  height: 215px;
+  height: 225px;
   margin-top: 8px;
 }
 
@@ -96,8 +106,8 @@ h1, h2, h3, h4, h5, h6 {
 
 .host-star {
   position: absolute;
-  width: 54px;
-  height: 54px;
+  width: 58px;
+  height: 58px;
   border-radius: 50%;
   background: radial-gradient(circle, #fff9b1 0%, #ffd25a 45%, #ff9f43 75%);
   box-shadow: 0 0 22px #ffd25a;
@@ -122,26 +132,26 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .orbit.one {
-  width: 92px;
-  height: 92px;
+  width: 96px;
+  height: 96px;
   animation-duration: 5s;
 }
 
 .orbit.two {
-  width: 128px;
-  height: 128px;
+  width: 134px;
+  height: 134px;
   animation-duration: 8s;
 }
 
 .orbit.three {
-  width: 164px;
-  height: 164px;
+  width: 172px;
+  height: 172px;
   animation-duration: 12s;
 }
 
 .orbit.four {
-  width: 198px;
-  height: 198px;
+  width: 208px;
+  height: 208px;
   animation-duration: 17s;
 }
 
@@ -196,8 +206,8 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .cluster-star.big {
-  width: 28px;
-  height: 28px;
+  width: 30px;
+  height: 30px;
   left: 50%;
   top: 44%;
   transform: translate(-50%, -50%);
@@ -207,8 +217,8 @@ h1, h2, h3, h4, h5, h6 {
 
 .transit-planet {
   position: absolute;
-  width: 11px;
-  height: 11px;
+  width: 12px;
+  height: 12px;
   border-radius: 50%;
   background: #4c4c62;
   left: 30%;
@@ -254,54 +264,77 @@ h1, h2, h3, h4, h5, h6 {
   justify-content: center;
   background: radial-gradient(circle at center, #f7f3ff 0%, #f6f8ff 100%);
   border-radius: 18px;
+  overflow: hidden;
 }
 
 .smbh {
   position: absolute;
-  width: 76px;
-  height: 76px;
+  width: 80px;
+  height: 80px;
   border-radius: 50%;
   background: radial-gradient(circle, #111 0%, #050505 55%, #5d4d7a 68%, #d9b3ff 78%, transparent 82%);
   box-shadow: 0 0 30px rgba(120, 88, 180, 0.65);
   animation: bhGlow 3s ease-in-out infinite;
+  z-index: 3;
 }
 
 .accretion-ring {
   position: absolute;
-  width: 120px;
-  height: 42px;
+  width: 130px;
+  height: 44px;
   border-radius: 50%;
   border: 8px solid rgba(210, 150, 255, 0.55);
   transform: rotate(-18deg);
   filter: blur(0.4px);
+  z-index: 2;
 }
 
-.eccentric-orbit {
+.eccentric-orbit-track {
   position: absolute;
-  width: 178px;
-  height: 104px;
+  width: 210px;
+  height: 118px;
   border: 1px dashed rgba(80, 60, 120, 0.28);
   border-radius: 50%;
-  animation: ellipseSpin 7s linear infinite;
+  transform: rotate(-18deg);
+  z-index: 1;
 }
 
+/* The small black hole follows this path, instead of spinning the orbit */
 .small-bh {
   position: absolute;
-  width: 22px;
-  height: 22px;
-  left: -8px;
-  top: 39px;
+  left: 50%;
+  top: 50%;
+  width: 24px;
+  height: 24px;
+  margin-left: -12px;
+  margin-top: -12px;
   border-radius: 50%;
   background: radial-gradient(circle, #222 0%, #000 62%, #b8a2ff 72%, transparent 78%);
   box-shadow: 0 0 13px rgba(120, 90, 255, 0.55);
-  animation: smallBhBob 1.4s ease-in-out infinite;
+  z-index: 4;
+  animation: eccentricBhOrbit 5.5s ease-in-out infinite;
+}
+
+.small-bh::after {
+  content: "";
+  position: absolute;
+  width: 30px;
+  height: 3px;
+  left: -28px;
+  top: 11px;
+  border-radius: 50%;
+  background: linear-gradient(to left, rgba(160,140,255,0.65), transparent);
+  opacity: 0.7;
 }
 
 /* Clicked-card behavior */
 
-.research-toy.is-excited .orbit,
-.research-toy.is-excited .eccentric-orbit {
+.research-toy.is-excited .orbit {
   animation-duration: 2.5s;
+}
+
+.research-toy.is-excited .small-bh {
+  animation-duration: 2.4s;
 }
 
 .research-toy.is-excited .cluster-star,
@@ -310,19 +343,86 @@ h1, h2, h3, h4, h5, h6 {
   animation-duration: 0.8s;
 }
 
+/* Modal pop-up */
+
+.project-modal {
+  display: none;
+  position: fixed;
+  z-index: 9999;
+  inset: 0;
+  background: rgba(20, 20, 35, 0.55);
+  backdrop-filter: blur(5px);
+  padding: 24px;
+  overflow-y: auto;
+}
+
+.project-modal.is-open {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.project-modal-content {
+  position: relative;
+  width: min(920px, 96vw);
+  max-height: 90vh;
+  overflow-y: auto;
+  background: white;
+  border-radius: 28px;
+  box-shadow: 0 24px 70px rgba(0,0,0,0.25);
+  padding: 28px;
+  animation: modalPop 0.22s ease-out;
+}
+
+.project-modal-close {
+  position: absolute;
+  top: 16px;
+  right: 18px;
+  border: none;
+  background: #f1f1f1;
+  color: #333;
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  font-size: 24px;
+  line-height: 32px;
+  cursor: pointer;
+}
+
+.project-modal-close:hover {
+  background: #e1e1e1;
+}
+
+.project-modal-grid {
+  display: grid;
+  grid-template-columns: 1fr 1.1fr;
+  gap: 26px;
+  align-items: center;
+}
+
+.project-modal-image {
+  width: 100%;
+  border-radius: 20px;
+  box-shadow: 0 8px 22px rgba(0,0,0,0.12);
+}
+
+.project-modal-text h2 {
+  margin-top: 0;
+  letter-spacing: 3px;
+}
+
+.project-modal-text p {
+  font-size: 18px;
+  line-height: 1.55;
+}
+
+.project-modal-text a {
+  font-size: 17px;
+}
+
 /* Animations */
 
 @keyframes orbitSpin {
-  from {
-    transform: rotate(0deg);
-  }
-
-  to {
-    transform: rotate(360deg);
-  }
-}
-
-@keyframes ellipseSpin {
   from {
     transform: rotate(0deg);
   }
@@ -448,13 +548,53 @@ h1, h2, h3, h4, h5, h6 {
   }
 }
 
-@keyframes smallBhBob {
-  0%, 100% {
-    transform: scale(1);
+@keyframes eccentricBhOrbit {
+  0% {
+    transform: translate(98px, -12px) scale(0.85);
+  }
+
+  10% {
+    transform: translate(82px, -43px) scale(0.9);
+  }
+
+  22% {
+    transform: translate(35px, -61px) scale(1);
+  }
+
+  36% {
+    transform: translate(-42px, -52px) scale(1.12);
   }
 
   50% {
-    transform: scale(1.15);
+    transform: translate(-92px, -6px) scale(1.22);
+  }
+
+  63% {
+    transform: translate(-58px, 42px) scale(1.12);
+  }
+
+  76% {
+    transform: translate(18px, 58px) scale(1);
+  }
+
+  90% {
+    transform: translate(78px, 34px) scale(0.9);
+  }
+
+  100% {
+    transform: translate(98px, -12px) scale(0.85);
+  }
+}
+
+@keyframes modalPop {
+  from {
+    transform: scale(0.96);
+    opacity: 0;
+  }
+
+  to {
+    transform: scale(1);
+    opacity: 1;
   }
 }
 
@@ -466,7 +606,11 @@ h1, h2, h3, h4, h5, h6 {
   }
 
   .research-toy {
-    min-height: 285px;
+    min-height: 305px;
+  }
+
+  .project-modal-grid {
+    grid-template-columns: 1fr;
   }
 }
 
@@ -528,116 +672,121 @@ h1, h2, h3, h4, h5, h6 {
   <hr>
   
   <!-- Research Section -->
-  <div class="w3-row w3-padding-64" id="Research">
+  <div class="w3-container w3-padding-64" id="Research">
 
-    <div class="w3-col l6 w3-padding-large">
-      <h1 class="w3-center">Research</h1><br>
+    <h1 class="w3-center">Research</h1><br>
 
-      <!-- Interactive Research Playground -->
-      <div class="research-playground">
-        <h2>Research Playground</h2>
-        <p class="subtitle">A tiny animated universe of exoplanets, clusters, and compact objects. Click each panel to make it excited.</p>
+    <!-- Full-width Interactive Research Playground -->
+    <div class="research-playground">
+      <h2>Research Playground</h2>
+      <p class="subtitle">A tiny animated universe of exoplanets, clusters, and compact objects. Click a panel to learn more.</p>
 
-        <div class="research-toy-grid">
+      <div class="research-toy-grid">
 
-          <!-- Toy 1: four-planet system -->
-          <div class="research-toy" onclick="toggleToy(this)">
-            <h3>Planetary System</h3>
-            <p>Four little planets orbiting a wiggly host star.</p>
+        <!-- Toy 1: exoplanet architectures -->
+        <button class="research-toy" onclick="openProjectModal('architectures')" type="button">
+          <h3>Exoplanet Architectures</h3>
+          <p>Four little planets orbiting a wiggly host star.</p>
 
-            <div class="toy-stage system-stage">
-              <div class="orbit one">
-                <div class="planet one"></div>
-              </div>
-
-              <div class="orbit two">
-                <div class="planet two"></div>
-              </div>
-
-              <div class="orbit three">
-                <div class="planet three"></div>
-              </div>
-
-              <div class="orbit four">
-                <div class="planet four"></div>
-              </div>
-
-              <div class="host-star"></div>
+          <div class="toy-stage system-stage">
+            <div class="orbit one">
+              <div class="planet one"></div>
             </div>
-          </div>
 
-          <!-- Toy 2: open cluster with transit -->
-          <div class="research-toy" onclick="toggleToy(this)">
-            <h3>Open Cluster Transit</h3>
-            <p>A planet crosses one cluster star and makes a tiny flux dip.</p>
-
-            <div class="toy-stage cluster-stage">
-              <div class="cluster-star big"></div>
-              <div class="transit-planet"></div>
-
-              <div class="cluster-star" style="left: 18%; top: 22%;"></div>
-              <div class="cluster-star" style="left: 72%; top: 18%; animation-delay: 0.3s;"></div>
-              <div class="cluster-star" style="left: 24%; top: 70%; animation-delay: 0.8s;"></div>
-              <div class="cluster-star" style="left: 80%; top: 68%; animation-delay: 1.1s;"></div>
-              <div class="cluster-star" style="left: 38%; top: 17%; animation-delay: 0.5s;"></div>
-              <div class="cluster-star" style="left: 62%; top: 76%; animation-delay: 1.4s;"></div>
-              <div class="cluster-star" style="left: 12%; top: 50%; animation-delay: 0.9s;"></div>
-              <div class="cluster-star" style="left: 88%; top: 44%; animation-delay: 0.2s;"></div>
-
-              <svg class="lightcurve" viewBox="0 0 300 80">
-                <path d="M 10 28 
-                         C 45 28, 70 28, 95 28 
-                         C 115 28, 118 58, 138 58 
-                         C 158 58, 161 28, 181 28 
-                         C 220 28, 250 28, 290 28" />
-              </svg>
-
-              <div class="flux-dot"></div>
+            <div class="orbit two">
+              <div class="planet two"></div>
             </div>
-          </div>
 
-          <!-- Toy 3: eccentric black hole binary -->
-          <div class="research-toy" onclick="toggleToy(this)">
-            <h3>Black Hole Dance</h3>
-            <p>A stellar-mass black hole loops around a supermassive one.</p>
-
-            <div class="toy-stage bh-stage">
-              <div class="eccentric-orbit">
-                <div class="small-bh"></div>
-              </div>
-
-              <div class="accretion-ring"></div>
-              <div class="smbh"></div>
+            <div class="orbit three">
+              <div class="planet three"></div>
             </div>
-          </div>
 
-        </div>
+            <div class="orbit four">
+              <div class="planet four"></div>
+            </div>
+
+            <div class="host-star"></div>
+          </div>
+        </button>
+
+        <!-- Toy 2: exoplanet ages -->
+        <button class="research-toy" onclick="openProjectModal('ages')" type="button">
+          <h3>Open Cluster Transit</h3>
+          <p>A planet crosses one cluster star and makes a tiny flux dip.</p>
+
+          <div class="toy-stage cluster-stage">
+            <div class="cluster-star big"></div>
+            <div class="transit-planet"></div>
+
+            <div class="cluster-star" style="left: 18%; top: 22%;"></div>
+            <div class="cluster-star" style="left: 72%; top: 18%; animation-delay: 0.3s;"></div>
+            <div class="cluster-star" style="left: 24%; top: 70%; animation-delay: 0.8s;"></div>
+            <div class="cluster-star" style="left: 80%; top: 68%; animation-delay: 1.1s;"></div>
+            <div class="cluster-star" style="left: 38%; top: 17%; animation-delay: 0.5s;"></div>
+            <div class="cluster-star" style="left: 62%; top: 76%; animation-delay: 1.4s;"></div>
+            <div class="cluster-star" style="left: 12%; top: 50%; animation-delay: 0.9s;"></div>
+            <div class="cluster-star" style="left: 88%; top: 44%; animation-delay: 0.2s;"></div>
+
+            <svg class="lightcurve" viewBox="0 0 300 80">
+              <path d="M 10 28 
+                       C 45 28, 70 28, 95 28 
+                       C 115 28, 118 58, 138 58 
+                       C 158 58, 161 28, 181 28 
+                       C 220 28, 250 28, 290 28" />
+            </svg>
+
+            <div class="flux-dot"></div>
+          </div>
+        </button>
+
+        <!-- Toy 3: galactic center dynamics -->
+        <button class="research-toy" onclick="openProjectModal('blackholes')" type="button">
+          <h3>Black Hole Dance</h3>
+          <p>A stellar-mass black hole loops around a supermassive one.</p>
+
+          <div class="toy-stage bh-stage">
+            <div class="eccentric-orbit-track"></div>
+            <div class="small-bh"></div>
+            <div class="accretion-ring"></div>
+            <div class="smbh"></div>
+          </div>
+        </button>
+
+      </div>
+    </div>
+
+    <!-- Original Research Content Below -->
+    <div class="w3-row">
+
+      <div class="w3-col l6 w3-padding-large">
+
+        <h4>Exoplanet Ages</h4>
+        <p class="w3-large">
+          With Prof. Soares-Furtado, we focus on the detection and characterization of exoplanets with a focus on providing precise age constraints. These planets can serve as benchmarks for theories of formation and evolution. We recently discovered a new exoplanet, TOI-4364b, orbiting a nearby M dwarf that is a Hyades member. We aim to characterize more properties of this system and others, to build a more complete picture of how exoplanet atmospheres, radii, and chemical composition change with time.
+          <a href="https://iopscience.iop.org/article/10.3847/1538-3881/ada26a">[1]</a>
+          <a href="https://iopscience.iop.org/article/10.3847/1538-3881/ae4c48">[2]</a>
+          <a href="https://iopscience.iop.org/article/10.3847/1538-3881/ae38be">[3]</a>
+        </p><br>
+      
+        <h4>Galactic Center Dynamics</h4>
+        <p class="w3-large">
+          A project with Prof. Nick Stone focused on understanding the behavior of compact objects near the centers of galaxies. We aim to characterize their orbital evolution and the occurrence rates of different behavior in preparation for next-generation gravitational wave facilities such as LISA.
+        </p><br>
+      
+        <h4>Exoplanet Dynamics and Architectures</h4>
+        <p class="w3-large">
+          Work with Prof. Juliette Becker on understanding the origins of exotic types of planets, such as Ultra-Short-Period Planets. With orbital periods of less than one day, we aim to investigate their formation mechanisms and environment.
+        </p><br>
+
+      </div>
+      
+      <div class="w3-col l6 w3-padding-large">
+        <img src="/images/Gemini_exo.jpg" class="w3-round w3-image" alt="Exoplanet research image" style="width:100%">
+        <img src="/images/EMRI_image.jpg" class="w3-round w3-image" alt="Galactic center dynamics image" style="width:100%">
+        <img src="/images/Gemini_archi.jpg" class="w3-round w3-image" alt="Exoplanet architecture image" style="width:100%">
+        <p class="w3-text-grey">(Images made by ChatGPT and Gemini)</p>
       </div>
 
-      <h4>Exoplanet Ages</h4>
-      <p class="w3-large">
-        With Prof. Soares-Furtado, we focus on the detection and characterization of exoplanets with a focus on providing precise age constraints. These planets can serve as benchmarks for theories of formation and evolution. We recently discovered a new exoplanet, TOI-4364b, orbiting a nearby M dwarf that is a Hyades member. We aim to characterize more properties of this system and others, to build a more complete picture of how exoplanet atmospheres, radii, and chemical composition change with time.
-        <a href="https://iopscience.iop.org/article/10.3847/1538-3881/ada26a">[1]</a>
-        <a href="https://iopscience.iop.org/article/10.3847/1538-3881/ae4c48">[2]</a>
-        <a href="https://iopscience.iop.org/article/10.3847/1538-3881/ae38be">[3]</a>
-      </p><br>
-    
-      <h4>Galactic Center Dynamics</h4>
-      <p class="w3-large">
-        A project with Prof. Nick Stone focused on understanding the behavior of compact objects near the centers of galaxies. We aim to characterize their orbital evolution and the occurrence rates of different behavior in preparation for next-generation gravitational wave facilities such as LISA.
-      </p><br>
-    
-      <h4>Exoplanet Dynamics and Architectures</h4>
-      <p class="w3-large">
-        Work with Prof. Juliette Becker on understanding the origins of exotic types of planets, such as Ultra-Short-Period Planets. With orbital periods of less than one day, we aim to investigate their formation mechanisms and environment.
-      </p><br>
-    </div>
-    
-    <div class="w3-col l6 w3-padding-large">
-      <img src="/images/Gemini_exo.jpg" class="w3-round w3-image" alt="Exoplanet research image" style="width:100%">
-      <img src="/images/EMRI_image.jpg" class="w3-round w3-image" alt="Galactic center dynamics image" style="width:100%">
-      <img src="/images/Gemini_archi.jpg" class="w3-round w3-image" alt="Exoplanet architecture image" style="width:100%">
-      <p class="w3-text-grey">(Images made by ChatGPT and Gemini)</p>
     </div>
 
   </div>
@@ -660,6 +809,25 @@ h1, h2, h3, h4, h5, h6 {
   
 </div>
 
+<!-- Project Modal -->
+<div id="projectModal" class="project-modal" onclick="closeProjectModal(event)">
+  <div class="project-modal-content" onclick="event.stopPropagation()">
+    <button class="project-modal-close" onclick="closeProjectModal()" type="button">&times;</button>
+
+    <div class="project-modal-grid">
+      <div>
+        <img id="modalImage" class="project-modal-image" src="" alt="">
+      </div>
+
+      <div class="project-modal-text">
+        <h2 id="modalTitle"></h2>
+        <p id="modalDescription"></p>
+        <p id="modalLinks"></p>
+      </div>
+    </div>
+  </div>
+</div>
+
 <!-- Footer -->
 <footer class="w3-center w3-light-grey w3-padding-32">
   <p>
@@ -669,9 +837,57 @@ h1, h2, h3, h4, h5, h6 {
 </footer>
 
 <script>
-function toggleToy(card) {
-  card.classList.toggle("is-excited");
+const projectData = {
+  architectures: {
+    title: "Exoplanet Dynamics and Architectures",
+    image: "/images/Gemini_archi.jpg",
+    alt: "Exoplanet architecture image",
+    description: "Work with Prof. Juliette Becker on understanding the origins of exotic types of planets, such as Ultra-Short-Period Planets. With orbital periods of less than one day, we aim to investigate their formation mechanisms and environment.",
+    links: ""
+  },
+
+  ages: {
+    title: "Exoplanet Ages",
+    image: "/images/Gemini_exo.jpg",
+    alt: "Exoplanet ages image",
+    description: "With Prof. Soares-Furtado, we focus on the detection and characterization of exoplanets with a focus on providing precise age constraints. These planets can serve as benchmarks for theories of formation and evolution. We recently discovered a new exoplanet, TOI-4364b, orbiting a nearby M dwarf that is a Hyades member. We aim to characterize more properties of this system and others, to build a more complete picture of how exoplanet atmospheres, radii, and chemical composition change with time.",
+    links: '<a href="https://iopscience.iop.org/article/10.3847/1538-3881/ada26a" target="_blank">Paper [1]</a> &nbsp; <a href="https://iopscience.iop.org/article/10.3847/1538-3881/ae4c48" target="_blank">Paper [2]</a> &nbsp; <a href="https://iopscience.iop.org/article/10.3847/1538-3881/ae38be" target="_blank">Paper [3]</a>'
+  },
+
+  blackholes: {
+    title: "Galactic Center Dynamics",
+    image: "/images/EMRI_image.jpg",
+    alt: "Galactic center dynamics image",
+    description: "A project with Prof. Nick Stone focused on understanding the behavior of compact objects near the centers of galaxies. We aim to characterize their orbital evolution and the occurrence rates of different behavior in preparation for next-generation gravitational wave facilities such as LISA.",
+    links: ""
+  }
+};
+
+function openProjectModal(projectKey) {
+  const project = projectData[projectKey];
+
+  document.getElementById("modalTitle").textContent = project.title;
+  document.getElementById("modalImage").src = project.image;
+  document.getElementById("modalImage").alt = project.alt;
+  document.getElementById("modalDescription").textContent = project.description;
+  document.getElementById("modalLinks").innerHTML = project.links;
+
+  document.getElementById("projectModal").classList.add("is-open");
 }
+
+function closeProjectModal(event) {
+  if (event && event.target.id !== "projectModal") {
+    return;
+  }
+
+  document.getElementById("projectModal").classList.remove("is-open");
+}
+
+document.addEventListener("keydown", function(event) {
+  if (event.key === "Escape") {
+    document.getElementById("projectModal").classList.remove("is-open");
+  }
+});
 </script>
 
 </body>
