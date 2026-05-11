@@ -275,7 +275,7 @@ h1, h2, h3, h4, h5, h6 {
   background: radial-gradient(circle, #111 0%, #050505 55%, #5d4d7a 68%, #d9b3ff 78%, transparent 82%);
   box-shadow: 0 0 30px rgba(120, 88, 180, 0.65);
   animation: bhGlow 3s ease-in-out infinite;
-  z-index: 3;
+  z-index: 4;
 }
 
 .accretion-ring {
@@ -286,33 +286,45 @@ h1, h2, h3, h4, h5, h6 {
   border: 8px solid rgba(210, 150, 255, 0.55);
   transform: rotate(-18deg);
   filter: blur(0.4px);
+  z-index: 3;
+}
+
+.bh-orbit-wrapper {
+  position: absolute;
+  width: 210px;
+  height: 118px;
+  left: 50%;
+  top: 50%;
+  margin-left: -105px;
+  margin-top: -59px;
+  transform: rotate(-18deg);
   z-index: 2;
 }
 
 .eccentric-orbit-track {
   position: absolute;
-  width: 210px;
-  height: 118px;
-  border: 1px dashed rgba(80, 60, 120, 0.28);
+  inset: 0;
+  border: 1px dashed rgba(80, 60, 120, 0.32);
   border-radius: 50%;
-  transform: rotate(-18deg);
-  z-index: 1;
 }
 
-/* The small black hole follows this path, instead of spinning the orbit */
+/* The small black hole follows the dashed ellipse directly */
 .small-bh {
   position: absolute;
-  left: 50%;
-  top: 50%;
   width: 24px;
   height: 24px;
-  margin-left: -12px;
-  margin-top: -12px;
+  left: -12px;
+  top: -12px;
   border-radius: 50%;
   background: radial-gradient(circle, #222 0%, #000 62%, #b8a2ff 72%, transparent 78%);
   box-shadow: 0 0 13px rgba(120, 90, 255, 0.55);
-  z-index: 4;
-  animation: eccentricBhOrbit 5.5s ease-in-out infinite;
+  z-index: 5;
+
+  offset-path: path("M 210 59 A 105 59 0 1 1 0 59 A 105 59 0 1 1 210 59");
+  offset-distance: 0%;
+  offset-rotate: 0deg;
+
+  animation: smoothEccentricOrbit 5.8s linear infinite, smallBhPulse 1.4s ease-in-out infinite;
 }
 
 .small-bh::after {
@@ -334,7 +346,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .research-toy.is-excited .small-bh {
-  animation-duration: 2.4s;
+  animation-duration: 2.6s, 0.8s;
 }
 
 .research-toy.is-excited .cluster-star,
@@ -548,41 +560,23 @@ h1, h2, h3, h4, h5, h6 {
   }
 }
 
-@keyframes eccentricBhOrbit {
-  0% {
-    transform: translate(98px, -12px) scale(0.85);
+@keyframes smoothEccentricOrbit {
+  from {
+    offset-distance: 0%;
   }
 
-  10% {
-    transform: translate(82px, -43px) scale(0.9);
+  to {
+    offset-distance: 100%;
   }
+}
 
-  22% {
-    transform: translate(35px, -61px) scale(1);
-  }
-
-  36% {
-    transform: translate(-42px, -52px) scale(1.12);
+@keyframes smallBhPulse {
+  0%, 100% {
+    filter: brightness(1);
   }
 
   50% {
-    transform: translate(-92px, -6px) scale(1.22);
-  }
-
-  63% {
-    transform: translate(-58px, 42px) scale(1.12);
-  }
-
-  76% {
-    transform: translate(18px, 58px) scale(1);
-  }
-
-  90% {
-    transform: translate(78px, 34px) scale(0.9);
-  }
-
-  100% {
-    transform: translate(98px, -12px) scale(0.85);
+    filter: brightness(1.35);
   }
 }
 
@@ -745,48 +739,17 @@ h1, h2, h3, h4, h5, h6 {
           <p>A stellar-mass black hole loops around a supermassive one.</p>
 
           <div class="toy-stage bh-stage">
-            <div class="eccentric-orbit-track"></div>
-            <div class="small-bh"></div>
+            <div class="bh-orbit-wrapper">
+              <div class="eccentric-orbit-track"></div>
+              <div class="small-bh"></div>
+            </div>
+
             <div class="accretion-ring"></div>
             <div class="smbh"></div>
           </div>
         </button>
 
       </div>
-    </div>
-
-    <!-- Original Research Content Below -->
-    <div class="w3-row">
-
-      <div class="w3-col l6 w3-padding-large">
-
-        <h4>Exoplanet Ages</h4>
-        <p class="w3-large">
-          With Prof. Soares-Furtado, we focus on the detection and characterization of exoplanets with a focus on providing precise age constraints. These planets can serve as benchmarks for theories of formation and evolution. We recently discovered a new exoplanet, TOI-4364b, orbiting a nearby M dwarf that is a Hyades member. We aim to characterize more properties of this system and others, to build a more complete picture of how exoplanet atmospheres, radii, and chemical composition change with time.
-          <a href="https://iopscience.iop.org/article/10.3847/1538-3881/ada26a">[1]</a>
-          <a href="https://iopscience.iop.org/article/10.3847/1538-3881/ae4c48">[2]</a>
-          <a href="https://iopscience.iop.org/article/10.3847/1538-3881/ae38be">[3]</a>
-        </p><br>
-      
-        <h4>Galactic Center Dynamics</h4>
-        <p class="w3-large">
-          A project with Prof. Nick Stone focused on understanding the behavior of compact objects near the centers of galaxies. We aim to characterize their orbital evolution and the occurrence rates of different behavior in preparation for next-generation gravitational wave facilities such as LISA.
-        </p><br>
-      
-        <h4>Exoplanet Dynamics and Architectures</h4>
-        <p class="w3-large">
-          Work with Prof. Juliette Becker on understanding the origins of exotic types of planets, such as Ultra-Short-Period Planets. With orbital periods of less than one day, we aim to investigate their formation mechanisms and environment.
-        </p><br>
-
-      </div>
-      
-      <div class="w3-col l6 w3-padding-large">
-        <img src="/images/Gemini_exo.jpg" class="w3-round w3-image" alt="Exoplanet research image" style="width:100%">
-        <img src="/images/EMRI_image.jpg" class="w3-round w3-image" alt="Galactic center dynamics image" style="width:100%">
-        <img src="/images/Gemini_archi.jpg" class="w3-round w3-image" alt="Exoplanet architecture image" style="width:100%">
-        <p class="w3-text-grey">(Images made by ChatGPT and Gemini)</p>
-      </div>
-
     </div>
 
   </div>
